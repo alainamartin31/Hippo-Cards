@@ -62,7 +62,7 @@ export default function StudyPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 px-6 py-10">
+      <main className="min-h-screen px-6 py-10" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
         <div className="mx-auto max-w-md">
           <p className="text-gray-600 dark:text-gray-400">Loading...</p>
         </div>
@@ -72,7 +72,7 @@ export default function StudyPage() {
 
   if (cardsToReview.length === 0) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 px-6 py-10">
+      <main className="min-h-screen px-6 py-10" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
         <div className="mx-auto max-w-md">
           <div className="mb-6 flex justify-between items-center">
             <Link href={`/study/deck/${deckId}`} className="text-blue-600 dark:text-blue-400 hover:underline">
@@ -98,7 +98,7 @@ export default function StudyPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 px-6 py-10 flex flex-col transition-colors duration-300">
+    <main className="min-h-screen px-6 py-10 flex flex-col transition-colors duration-300" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
       <div className="mx-auto max-w-2xl w-full flex flex-col flex-1">
         {/* Header */}
         <div className="mb-8 flex justify-between items-start">

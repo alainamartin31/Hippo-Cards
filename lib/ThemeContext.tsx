@@ -2,52 +2,55 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+export type ThemeType = 'dark' | 'purple';
+
 interface ThemeContextType {
-  isDark: boolean;
-  toggleTheme: () => void;
+  theme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
+  const [theme, setThemeState] = useState<ThemeType>('light');
   const [mounted, setMounted] = useState(false);
 
   // Initialize theme on mount
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const shouldBeDark = theme === "dark" || (theme === null && prefersDark);
+    const savedTheme = localStorage.getItem("theme") as ThemeType;
+    const defaultTheme = savedTheme || 'dark';
     
-    setIsDark(shouldBeDark);
+    setThemeState(defaultTheme);
     setMounted(true);
   }, []);
 
-  // Update DOM whenever isDark changes
+  // Update DOM whenever theme changes
   useEffect(() => {
     if (!mounted) return;
     
     const html = document.documentElement;
     
-    if (isDark) {
-      html.classList.add("dark");
+    // Remove all theme classes
+    html.classList.remove('dark', 'purple');
+    
+    // Add current theme class
+    html.classList.add(theme);
+    
+    // Set color scheme for system integration
+    if (theme === 'dark') {
       html.style.colorScheme = "dark";
     } else {
-      html.classList.remove("dark");
       html.style.colorScheme = "light";
     }
-  }, [isDark, mounted]);
+  }, [theme, mounted]);
 
-  const toggleTheme = () => {
-    setIsDark((prev) => {
-      const newIsDark = !prev;
-      localStorage.setItem("theme", newIsDark ? "dark" : "light");
-      return newIsDark;
-    });
+  const setTheme = (newTheme: ThemeType) => {
+    setThemeState(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

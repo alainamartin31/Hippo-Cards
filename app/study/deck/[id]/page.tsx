@@ -65,7 +65,7 @@ export default function DeckPage() {
 
   if (!deck) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 px-6 py-10">
+      <main className="min-h-screen px-6 py-10" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
         <div className="mx-auto max-w-md">
           <p className="text-gray-600 dark:text-gray-400">Loading deck...</p>
         </div>
@@ -74,7 +74,7 @@ export default function DeckPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 px-6 py-10 transition-colors duration-300">
+    <main className="min-h-screen px-6 py-10 transition-colors duration-300" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
       <div className="mx-auto max-w-md">
         <div className="mb-6 flex justify-between items-center">
           <Link href="/study/mydecks" className="text-blue-600 dark:text-blue-400 hover:underline">

@@ -3,11 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { getDecks } from "@/lib/deckStorage";
+import { deleteDeck, getDecks } from "@/lib/deckStorage";
 
 export default function MyDecksPage() {
   const [decks, setDecks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const refreshDecks = () => setDecks(getDecks());
+
+  const handleDeleteDeck = (deckId: string) => {
+    if (!confirm("Delete this deck? This will remove all cards permanently.")) {
+      return;
+    }
+    deleteDeck(deckId);
+    refreshDecks();
+  };
 
   useEffect(() => {
     const userDecks = getDecks();
@@ -17,7 +27,7 @@ export default function MyDecksPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 px-6 py-10">
+      <main className="min-h-screen px-6 py-10" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
         <div className="mx-auto max-w-md">
           <p className="text-gray-600 dark:text-gray-400">Loading decks...</p>
         </div>
@@ -26,7 +36,7 @@ export default function MyDecksPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 px-6 py-10 transition-colors duration-300">
+      <main className="min-h-screen px-6 py-10 transition-colors duration-300" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
       <div className="mx-auto max-w-md">
         <div className="mb-6 flex justify-between items-center">
           <Link href="/study" className="text-blue-600 dark:text-blue-400 hover:underline">
@@ -55,7 +65,8 @@ export default function MyDecksPage() {
               {decks.map((deck) => (
                 <div
                   key={deck.id}
-                  className="rounded-2xl bg-white dark:bg-slate-800 p-5 shadow-sm border border-gray-200 dark:border-slate-700"
+                  className="rounded-2xl p-5 shadow-sm border"
+                  style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
                 >
                   <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     {deck.name}
@@ -69,19 +80,26 @@ export default function MyDecksPage() {
                     {deck.cards.length} {deck.cards.length === 1 ? "card" : "cards"}
                   </p>
 
-                  <div className="mt-4 flex gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     <Link
                       href={`/study/deck/${deck.id}/study`}
-                      className="flex-1 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 px-3 py-2 text-white text-sm font-medium text-center hover:from-purple-700 hover:to-pink-700 dark:hover:from-purple-600 dark:hover:to-pink-600 transition-colors"
+                      className="flex-1 min-w-[120px] rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 px-3 py-2 text-white text-sm font-medium text-center hover:from-purple-700 hover:to-pink-700 dark:hover:from-purple-600 dark:hover:to-pink-600 transition-colors"
                     >
                       Study
                     </Link>
                     <Link
                       href={`/study/deck/${deck.id}`}
-                      className="flex-1 rounded-lg bg-gray-200 dark:bg-slate-700 px-3 py-2 text-gray-900 dark:text-white text-sm font-medium text-center hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
+                      className="flex-1 min-w-[120px] rounded-lg bg-gray-200 dark:bg-slate-700 px-3 py-2 text-gray-900 dark:text-white text-sm font-medium text-center hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
                     >
                       Edit
                     </Link>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteDeck(deck.id)}
+                      className="flex-1 min-w-[120px] rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-3 py-2 transition-colors"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))}

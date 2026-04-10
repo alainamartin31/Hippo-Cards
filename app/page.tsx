@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 px-6 py-10 transition-colors duration-300">
+    <main className="min-h-screen px-6 py-10 transition-colors duration-300" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
       <div className="mx-auto max-w-3xl">
         {/* Theme Toggle */}
         <div className="flex justify-end mb-8">
@@ -37,43 +37,43 @@ export default function HomePage() {
 
         {/* Feature Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="group p-6 bg-white dark:bg-slate-800 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-purple-100 dark:border-purple-800 hover:border-purple-300 dark:hover:border-purple-600 hover:scale-105">
+          <div className="group p-6 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border hover:scale-105" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
             <div className="text-4xl mb-4">🎯</div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--foreground)' }}>
               Adaptive Learning
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm" style={{ color: 'var(--foreground)', opacity: 0.7 }}>
               Our algorithm learns your pace and adjusts difficulty in real-time.
             </p>
           </div>
 
-          <div className="group p-6 bg-white dark:bg-slate-800 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-purple-100 dark:border-purple-800 hover:border-purple-300 dark:hover:border-purple-600 hover:scale-105">
+          <div className="group p-6 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border hover:scale-105" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
             <div className="text-4xl mb-4">🛠️</div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--foreground)' }}>
               Build Your Decks
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm" style={{ color: 'var(--foreground)', opacity: 0.7 }}>
               Create custom flashcards for any subject with unlimited cards.
             </p>
           </div>
 
-          <div className="group p-6 bg-white dark:bg-slate-800 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-purple-100 dark:border-purple-800 hover:border-purple-300 dark:hover:border-purple-600 hover:scale-105">
+          <div className="group p-6 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border hover:scale-105" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
             <div className="text-4xl mb-4">📚</div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--foreground)' }}>
               Public Decks
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm" style={{ color: 'var(--foreground)', opacity: 0.7 }}>
               Browse and study decks shared by our community.
             </p>
           </div>
         </div>
 
         {/* Additional Features */}
-        <div className="mt-12 p-8 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-3xl border border-purple-200 dark:border-purple-700">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="mt-12 p-8 rounded-3xl border" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+          <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>
             Why Choose Hippo Cards?
           </h3>
-          <ul className="space-y-3 text-gray-700 dark:text-gray-300">
+          <ul className="space-y-3" style={{ color: 'var(--foreground)', opacity: 0.8 }}>
             <li className="flex items-center gap-3">
               <span className="text-xl">✅</span>
               <span>Spaced repetition scheduling for optimal retention</span>
